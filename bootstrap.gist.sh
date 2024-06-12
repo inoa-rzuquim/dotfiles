@@ -74,7 +74,7 @@ cd ~/.inoa/
 
 while [ "$CLONE_SUCCESSFUL" == false ]; do
     echo "Trying to clone $DOTFILES_REPO"
-    git clone $DOTFILES_REPO
+    git clone --depth 0 $DOTFILES_REPO
 
     if [ $? -eq 0 ]; then
         break
@@ -92,7 +92,7 @@ while [ "$CLONE_SUCCESSFUL" == false ]; do
         echo
     fi
 
-    echo -e "${YELLOW}Copy your public key to your GitHub account:${NC}"
+    echo -e "${YELLOW}Copy your public key to your GitHub account (Ctrl+Shift+C):${NC}"
     echo -e "${YELLOW}https://github.com/settings/ssh/new${NC}"
     echo
     while IFS= read -r line; do
@@ -101,6 +101,10 @@ while [ "$CLONE_SUCCESSFUL" == false ]; do
     echo
     read -n 1 -s -r -p "After adding the key on GitHub, press any key to try again..."
 done
+
+echo -e "${VIOLET}---------------------------------${NC}"
+echo -e "${VIOLET}inoa dotfiles cloned${NC}"
+echo -e "${VIOLET}---------------------------------${NC}"
 
 cd dotfiles
 source ./init.sh
