@@ -1,8 +1,14 @@
 
 is_installed() {
-    if dpkg -l "$1" 2>/dev/null | grep -q ^ii; then
+    if dpkg -l "$1" 2>/dev/null | grep -q "^ii"; then
         return 0
-    elif snap list "$1" &> /dev/null; then
+    elif snap list "$1" &>/dev/null; then
+        return 0
+    elif cargo install --list 2>/dev/null | grep "^$1" &>/dev/null; then
+        return 0
+    elif npm list -g --depth=0 2>/dev/null | grep "$1@" &>/dev/null; then
+        return 0
+    elif [ "$1" = "nodejs" ] && command -v node >/dev/null 2>&1; then
         return 0
     else
         return 1
@@ -37,14 +43,17 @@ custom_install() {
         docker-ce)
             docker_pre_install
             ;;
-        google-chrome)
+        google-chrome-stable)
             chrome_install
             ;;
         nodejs)
-            chrome_install
+            nodejs_install
             ;;
         zsh)
-            chrome_install
+            zsh_install
+            ;;
+        rustup)
+            rust_install
             ;;
     esac
 }
@@ -59,7 +68,7 @@ docker_pre_install() {
         $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
         sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-    sudo apt-get update
+    sudo apt update
 
     sudo usermod -aG docker $USER
     newgrp docker
@@ -69,20 +78,22 @@ chrome_install() {
     wget https://dl-ssl.google.com/linux/linux_signing_key.pub -O /tmp/google.pub
     gpg --no-default-keyring --keyring /etc/apt/keyrings/google-chrome.gpg --import /tmp/google.pub
     echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-    sudo apt-get update 
-    sudo apt-get install google-chrome-stable
+    sudo apt update 
+    sudo apt install -y google-chrome-stable
 }
 
 nodejs_install() {
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+    source ~/.bashrc
     nvm install 20
 }
 
 zsh_install() {
-    sudo apt install zsh
-    echo 'deb http://download.opensuse.org/repositories/shells:/zsh-users:/zsh-autosuggestions/xUbuntu_22.04/ /' | sudo tee /etc/apt/sources.list.d/shells:zsh-users:zsh-autosuggestions.list
-    curl -fsSL https://download.opensuse.org/repositories/shells:zsh-users:zsh-autosuggestions/xUbuntu_22.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_zsh-users_zsh-autosuggestions.gpg > /dev/null
-    sudo apt update
-    sudo apt install zsh-autosuggestions
+    sudo apt install -y zsh
+}
+
+rust_install() {
+    sudo snap install rustup --classic
+    rustup default stable
 }
 
