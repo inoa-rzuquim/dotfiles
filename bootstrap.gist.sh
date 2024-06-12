@@ -4,10 +4,12 @@
 DOTFILES_REPO=git@github.com:inoa-rzuquim/dotfiles.git
 GIST_REPO=https://inoa.com.br/dev_boostrap.sh
 
-# Colors
+# ---------------------------------
+# COLORS
+# ---------------------------------
 RED='\033[0;31m'
 GREEN='\033[0;32m'
-CYAN="\e[38;2;0;0;255m"
+CYAN="\e[38;2;173;216;230m"
 INDIGO="\e[38;2;75;0;130m"
 VIOLET="\e[38;2;238;130;238m"
 YELLOW='\033[1;33m'
@@ -46,6 +48,25 @@ echo "Bootstraping dev env"
 read -p "Please enter your inoa email: " INOA_EMAIL
 echo
 
+# ---------------------------------
+# KNOWN HOSTS
+# ---------------------------------
+KNOWN_HOSTS_FILE=~/.ssh/known_hosts
+
+if [ ! -d ~/.ssh ]; then
+  mkdir -p ~/.ssh
+  chmod 700 ~/.ssh
+fi
+
+# Check if github.com is already in known_hosts
+if [ ! -f "$KNOWN_HOSTS_FILE" ] || ! grep -q "^github.com " "$KNOWN_HOSTS_FILE"; then
+  echo -e "${CYAN}Adding github.com to known_hosts${NC}"
+  ssh-keyscan github.com >> "$KNOWN_HOSTS_FILE"
+fi
+
+# ---------------------------------
+# CLONING dotfiles
+# ---------------------------------
 CLONE_SUCCESSFUL=false
 
 mkdir -p ~/.inoa/
@@ -66,7 +87,7 @@ while [ "$CLONE_SUCCESSFUL" == false ]; do
     # Check if an SSH key already exists
     if [ ! -f ~/.ssh/id_ed25519 ]; then
         echo -e "${CYAN}No SSH key found. Generating a new SSH key...${NC}"
-        ssh-keygen -t ed25519 -C "$INOA_EMAIL"
+        ssh-keygen -t ed25519 -C "$INOA_EMAIL" -f ~/.ssh/id_ed25519
         echo -e "${GREEN}SSH key generated and added to the ssh-agent.${NC}"
         echo
     fi
@@ -74,10 +95,13 @@ while [ "$CLONE_SUCCESSFUL" == false ]; do
     echo -e "${YELLOW}Copy your public key to your GitHub account:${NC}"
     echo -e "${YELLOW}https://github.com/settings/ssh/new${NC}"
     echo
-
-    cat ~/.ssh/id_ed25519.pub
+    while IFS= read -r line; do
+        echo -e "${RED}$line${NC}"
+    done < "$HOME/.ssh/id_ed25519.pub"
+    echo
     read -n 1 -s -r -p "After adding the key on GitHub, press any key to try again..."
 done
 
-echo -e "${GREEN}SUCESSO{NC}"
+cd dotfiles
+source ./init.sh
 
