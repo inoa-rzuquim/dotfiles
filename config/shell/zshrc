@@ -1,0 +1,89 @@
+# If you come from bash you might have to change your $PATH.
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$HOME/.cargo/bin:$HOME/.dotnet/bin:$PATH
+export BROWSER="google-chrome"
+
+# ignoring history duplicate
+export HISTCONTROL=ignoreboth
+
+# clipboard config
+export CM_SELECTIONS="clipboard"
+export CM_DEBUG=0
+export CM_OUT_CLIP=0
+export CM_MAX_CLIPS=100
+
+# user configuration
+eval "$(starship init zsh)"
+
+# ---------------------
+# aliases
+# ---------------------
+alias q='exit'
+alias c='clear'
+alias h='history'
+alias mkdir='mkdir -p'
+alias ls='eza -la --group-directories-first --time-style=long-iso --no-user --no-permissions'
+alias diff='delta'
+alias vi='nvim'
+alias vim='nvim'
+alias nv='nvim'
+alias null='/dev/null'
+alias grep='rg --color=auto'
+alias cat='bat'
+alias clip='xclip -sel c'
+alias home='cd ~'
+alias root='cd /'
+alias o=xdg-open
+alias ..='cd ..'
+alias ...='cd ..; cd ..'
+alias ....='cd ..; cd ..; cd ..'
+
+# executing the work script on the current proccess so we can cd into the working directory
+alias work='git-change-ssh-keys inoa && source work'
+alias inoa-vpn='sudo openvpn --config /etc/secrets/inoa-vpn.ovpn --auth-user-pass /etc/secrets/vpn-pwd --daemon'
+
+# ---------------------
+# navigation
+# ---------------------
+# using fd as default fzf finder (following links, including hidden files and excluding useless directories)
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude node_modules --exclude .git'
+
+function config {
+    cd ~/.config
+    cd $(
+        ls --icons | awk '{ print $7 " " $8 }' |
+        fzf |
+        awk '{ print $2 }'
+    ) && nvim .
+}
+
+# create a dir even if it does not exist
+function mkd {
+    mkdir -p -- "$1" &&
+    cd -P -- "$1"
+}
+
+# search the contents of every file
+function search {
+   rg -p "$@" -A 3 -B 3 --color=always | less -RMFXK
+}
+
+# --------------------
+# auto suggestions
+# --------------------
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+fpath=(~/.zsh/zsh-completions/src $fpath)
+
+# --------------------
+# context navigation
+# --------------------
+if [[ -f "$HOME/.context" ]]; then
+    currentWorkspace=`cat ~/.context | awk '{ print $2}'`
+    cd $currentWorkspace
+fi
+
+# --------------------
+# env vars
+# --------------------
+source ~/.config/shell/.env.sh

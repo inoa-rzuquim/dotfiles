@@ -4,3 +4,5 @@ source "./utils/colors.sh"
 source "./utils/install.sh"
 
 source "./basic/install.sh"
+source "./basic/config.sh"
+
