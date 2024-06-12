@@ -1,11 +1,6 @@
 #!/bin/bash
 
 source "./utils/colors.sh"
+source "./utils/install.sh"
 
-# 
-# COLORS
-# ---------------------------------
-echo -e "${VIOLET}---------------------------------${NC}"
-echo -e "${VIOLET}SUCESSO${NC}"
-echo -e "${VIOLET}---------------------------------${NC}"
-
+source "./basic/install.sh"
