@@ -21,7 +21,18 @@ if [[ $response =~ ^[Yy]$ ]]; then
         sudo mv $local_temp $VPN_PWD_FILE
     fi
 
-    download_full_ovpn 
+    SVN_PWD_FILE=/etc/secrets/svn-pwd
+    if [ ! -f $SVN_PWD_FILE ]; then
+        read -s -p "Please enter your SVN password: " INOA_SVN_PASSWORD
+        echo
+
+        local_temp=./svn-pwd
+        echo "$INOA_EMAIL" > $local_temp
+        echo "$INOA_SVN_PASSWORD" >> $local_temp
+        sudo mv $local_temp $SVN_PWD_FILE
+    fi
+
+    download_full_ovpn
 else
     echo -e "${RED}Won't apply vpn configuration!${NC}"
 fi
