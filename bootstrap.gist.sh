@@ -45,7 +45,23 @@ echo -e "${CYAN}            @@  @   @${NC}"
 echo -e "${CYAN}            @${NC}" 
 
 echo "Bootstraping dev env"
-read -p "Please enter your inoa email: " INOA_EMAIL
+
+if [ ! -d ~/.inoa ]; then
+  mkdir -p ~/.inoa
+fi
+
+WHOAMI_FILE=~/.inoa/whoami
+if [ ! -f $WHOAMI_FILE ]; then
+    read -p "Please enter your inoa email: " INOA_EMAIL
+    read -p "Please enter your first and last names: " INOA_NAME
+
+    echo "$INOA_EMAIL" > $WHOAMI_FILE
+    echo "$INOA_NAME" >> $WHOAMI_FILE
+else
+    INOA_EMAIL=$(head -n 1 $WHOAMI_FILE)
+    INOA_NAME=$(tail -n 1 $WHOAMI_FILE)
+    echo "Wellcome back $INOA_NAME ($INOA_EMAIL)!"
+fi
 echo
 
 # ---------------------------------
@@ -74,7 +90,7 @@ cd ~/.inoa/
 
 while [ "$CLONE_SUCCESSFUL" == false ]; do
     echo "Trying to clone $DOTFILES_REPO"
-    git clone --depth 0 $DOTFILES_REPO
+    git clone --depth 1 $DOTFILES_REPO
 
     if [ $? -eq 0 ]; then
         break
