@@ -2,7 +2,7 @@
 
 if [ -z "$INOA_NAME" ] || [ -z "$INOA_EMAIL" ]; then
     WHOAMI_FILE=~/.inoa/whoami
-    if [ ! -f $WHOAMI_FILE ]; then
+    if [ ! -f "$WHOAMI_FILE" ]; then
         echo "Could not find out who you are! Please run the boostrap script!"
         exit 1
     else
