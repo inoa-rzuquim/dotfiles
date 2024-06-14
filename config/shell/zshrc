@@ -78,11 +78,11 @@ function search {
 # --------------------
 source ~/.zsh/autosuggestions/zsh-autosuggestions.zsh
 
-fpath=(~/.zsh/completions $fpath)
+fpath=(~/.zsh/completions/src $fpath)
 
 source ~/.zsh/history-substring-search/zsh-history-substring-search.zsh
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+bindkey '\eOA' history-substring-search-up # or '^[[A' 
+bindkey '\eOB' history-substring-search-down # or '^[[B'
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
 # --------------------
