@@ -31,6 +31,7 @@ set_inoa_bg() {
             'obsidian_obsidian'
             'remmina_remmina'
             'telegram-desktop_telegram-desktop'
+            'teams-for-linux_teams-for-linux'
             'org.gnome.Nautilus'
             'gnome-control-center'
         )
