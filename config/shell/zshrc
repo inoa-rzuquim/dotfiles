@@ -74,11 +74,16 @@ function search {
 }
 
 # --------------------
-# auto suggestions
+# zsh improvements
 # --------------------
 source ~/.zsh/autosuggestions/zsh-autosuggestions.zsh
-source ~/.zsh/syntax-highlighting/zsh-syntax-highlighting.zsh
+
 fpath=(~/.zsh/completions $fpath)
+
+source ~/.zsh/history-substring-search/zsh-history-substring-search.zsh
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 
 # --------------------
 # context navigation

@@ -37,9 +37,15 @@ set_default_shell() {
         fi
 
         # suggestions 
-        git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/autosuggestions
-        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/syntax-highlighting
-        git clone https://github.com/zsh-users/completions.git ~/.zsh/completions
+        if [ ! -d  ~/.zsh/autosuggestions ]; then
+            git clone git@github.com:zsh-users/zsh-autosuggestions.git ~/.zsh/autosuggestions
+        fi
+        if [ ! -d  ~/.zsh/completions ]; then
+            git clone git@github.com:zsh-users/zsh-completions.git ~/.zsh/completions
+        fi
+        if [ ! -d  ~/.zsh/history-substring-search ]; then
+            git clone git@github.com:zsh-users/zsh-history-substring-search.git ~/.zsh/history-substring-search
+        fi
 
         echo "Please enter your user's password"
         chsh -s $zsh_path
