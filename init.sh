@@ -16,6 +16,7 @@ source "./utils/colors.sh"
 source "./utils/install.sh"
 source "./utils/terminal.sh"
 source "./utils/appearance.sh"
+source "./utils/security.sh"
 
 # source "./basic/install.sh"
 echo ""

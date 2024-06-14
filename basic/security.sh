@@ -21,7 +21,7 @@ if [[ $response =~ ^[Yy]$ ]]; then
         sudo mv $local_temp $VPN_PWD_FILE
     fi
 
-    download_full_ovpn
+    download_full_ovpn 
 else
     echo -e "${RED}Won't apply vpn configuration!${NC}"
 fi
