@@ -14,8 +14,11 @@ if [[ $response =~ ^[Yy]$ ]]; then
     if [ ! -f $VPN_PWD_FILE ]; then
         read -s -p "Please enter your VPN password: " INOA_VPN_PASSWORD
         echo
-        sudo echo "$INOA_EMAIL" > $VPN_PWD_FILE
-        sudo echo "$INOA_VPN_PASSWORD" >> $VPN_PWD_FILE
+
+        local_temp=./vpn-pwd
+        echo "$INOA_EMAIL" > $local_temp
+        echo "$INOA_VPN_PASSWORD" >> $local_temp
+        sudo mv $local_temp $VPN_PWD_FILE
     fi
 
     download_full_ovpn
