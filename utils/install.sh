@@ -1,3 +1,4 @@
+#!/bin/bash
 
 is_installed() {
     if dpkg -l "$1" 2>/dev/null | grep -q "^ii"; then
@@ -55,6 +56,9 @@ custom_install() {
         rustup)
             rust_install
             ;;
+        copyq)
+            copyq_install
+            ;;
     esac
 }
 
@@ -68,7 +72,7 @@ docker_pre_install() {
         $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
         sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-    sudo apt update
+    sudo apt update -y
 
     sudo usermod -aG docker $USER
     newgrp docker
@@ -78,7 +82,7 @@ chrome_install() {
     wget https://dl-ssl.google.com/linux/linux_signing_key.pub -O /tmp/google.pub
     gpg --no-default-keyring --keyring /etc/apt/keyrings/google-chrome.gpg --import /tmp/google.pub
     echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
-    sudo apt update 
+    sudo apt update -y
     sudo apt install -y google-chrome-stable
 }
 
@@ -95,5 +99,11 @@ zsh_install() {
 rust_install() {
     sudo snap install rustup --classic
     rustup default stable
+}
+
+copyq_install() {
+    sudo add-apt-repository -y ppa:hluk/copyq
+    sudo apt update -y
+    sudo apt install -y copyq
 }
 

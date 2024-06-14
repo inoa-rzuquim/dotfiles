@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # NOTE: some of those packages need to be installed in this order
 
@@ -26,6 +27,7 @@ BASIC_PACKAGES=(
     "libfontconfig1-dev @ apt"
     "libxcb-xfixes0-dev @ apt"
     "libxkbcommon-dev @ apt"
+    "copyq @ custom"
 
     # communications
     "easy-rsa @ apt"
@@ -35,7 +37,7 @@ BASIC_PACKAGES=(
 
     # terminal
     "zsh @ custom"
-    "starship @ snap-edge"
+    "starship @ cargo"
     "fonts-firacode @ apt"
     "gitui @ cargo"
     "alacritty @ cargo"
@@ -86,10 +88,11 @@ if [[ $response =~ ^[Yy]$ ]]; then
 else
     echo -e "${RED}Aborting setup!!${NC}"
     echo -e "${RED}Comment out what you don't want and run the script later.${NC}"
-    exit 1
+    return
 fi
 
 sudo apt update -y
+sudo apt upgrade
 
 for package in "${BASIC_PACKAGES[@]}"; do
     package_name=$(echo "$package" | cut -d '@' -f 1 | xargs)
