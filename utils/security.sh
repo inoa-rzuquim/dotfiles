@@ -29,7 +29,7 @@ download_complete_ovpn_file() {
     echo "Waiting for VPN to establish connection..."
     sleep 10  # Adjust the sleep time if needed to ensure the VPN connection is established
 
-    echo "Downloading file using SVN..."
+    echo "Downloading file using SVN ($SVN_URL => $OVPN_FILES_SECRETS)..."
     inoa-svn-download-file "$SVN_URL" "$OVPN_FILES_SECRETS"
 
     if [ $? -eq 0 ]; then
