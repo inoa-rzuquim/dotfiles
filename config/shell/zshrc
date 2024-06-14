@@ -104,3 +104,10 @@ source ~/.config/shell/env.sh
 for file in ~/.config/shell/sh/*.sh; do
     . "$file"
 done
+
+# --------------------
+# node
+# --------------------
+export NVM_DIR=~/.nvm
+source "$NVM_DIR/nvm.sh"
+
