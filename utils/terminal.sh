@@ -1,15 +1,10 @@
 #!/bin/bash
 
-get_default_terminal() {
-    update-alternatives --query x-terminal-emulator | grep 'Value:' | awk '{print $2}'
-}
-
 set_default_terminal() {
     set_terminal=$1
     terminal_name="${set_terminal##*/}"
-    current_terminal=get_default_terminal
+    current_terminal=$(update-alternatives --query x-terminal-emulator | grep 'Value:' | awk '{print $2}')
 
-    echo "comparando |$current_terminal| com |$set_terminal|"
     if [ "$set_terminal" != "$current_terminal" ]; then
         echo "Setting Alacritty as the default terminal emulator ($set_terminal)..."
         sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $set_terminal 50

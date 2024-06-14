@@ -93,7 +93,8 @@ nodejs_install() {
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
     source ~/.nvm/nvm.sh
     nvm install 18.12.1
-    nvm use 18.12.1
+    nvm alias default 18.12.1
+    nvm use
 }
 
 zsh_install() {
