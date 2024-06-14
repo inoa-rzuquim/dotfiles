@@ -34,6 +34,7 @@ BASIC_PACKAGES=(
     "openvpn @ apt"
     "remmina @ snap"
     "telegram-desktop @ snap"
+    "teams-for-linux @ snap"
 
     # terminal
     "zsh @ custom"
