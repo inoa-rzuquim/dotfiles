@@ -14,6 +14,6 @@ function inoa-svn-download-file() {
     INOA_SVN_USER=$(head -n 1 $SVN_CREDENTIALS_FILE)
     INOA_SVN_PWD=$(tail -n 1 $SVN_CREDENTIALS_FILE)
 
-    sudo svn export --username $INOA_SVN_USER --password $INOA_SVN_PWD "$SVN_URL" "$OVPN_FILES_SECRETS"
+    sudo svn export --username $INOA_SVN_USER --password $INOA_SVN_PWD "$1" "$2"
 }
 

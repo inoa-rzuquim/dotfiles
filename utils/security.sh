@@ -30,7 +30,7 @@ download_complete_ovpn_file() {
     sleep 10  # Adjust the sleep time if needed to ensure the VPN connection is established
 
     echo "Downloading file using SVN..."
-    svn export "$SVN_URL" "$OVPN_FILES_SECRETS"
+    inoa-svn-download-file "$SVN_URL" "$OVPN_FILES_SECRETS"
 
     if [ $? -eq 0 ]; then
         echo "File downloaded successfully."
