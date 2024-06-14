@@ -18,6 +18,10 @@ source "./utils/terminal.sh"
 source "./utils/appearance.sh"
 source "./utils/security.sh"
 
+for file in ~/.config/shell/sh/*.sh; do
+    . "$file"
+done
+
 # source "./basic/install.sh"
 echo ""
 echo ""

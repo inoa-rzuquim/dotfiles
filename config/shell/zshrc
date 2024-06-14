@@ -43,10 +43,6 @@ alias ..='cd ..'
 alias ...='cd ..; cd ..'
 alias ....='cd ..; cd ..; cd ..'
 
-# executing the work script on the current proccess so we can cd into the working directory
-alias work='git-change-ssh-keys inoa && source work'
-alias inoa-vpn='sudo openvpn --config /etc/secrets/inoa-vpn.ovpn --auth-user-pass /etc/secrets/vpn-pwd --daemon'
-
 # ---------------------
 # navigation
 # ---------------------
