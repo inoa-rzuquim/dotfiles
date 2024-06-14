@@ -17,9 +17,9 @@ set_default_terminal() {
         gsettings set org.gnome.desktop.default-applications.terminal exec "$terminal_name"
         gsettings set org.gnome.desktop.default-applications.terminal exec-arg ''
 
-        bin_link="/usr/bin/$terminal_name"
+        bin_link="/usr/local/bin/$terminal_name"
         if [ ! -L "$bin_link" ]; then
-            ln -s "$set_terminal" "$bin_link" > /dev/null
+            sudo ln -s "$set_terminal" "$bin_link" > /dev/null
         fi
     else
         echo "Alacritty is already the default terminal emulator."
