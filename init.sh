@@ -14,9 +14,12 @@ fi
 
 source "./utils/colors.sh"
 source "./utils/install.sh"
+source "./utils/terminal.sh"
+source "./utils/appearance.sh"
 
 source "./basic/install.sh"
 echo ""
 echo ""
 echo ""
 source "./basic/config.sh"
+

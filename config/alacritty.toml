@@ -1,0 +1,17 @@
+[window]
+decorations = "Full"
+padding.x = 10
+padding.y = 10
+
+[font]
+normal.family = "Fira Code"
+normal.style = "Regular"
+
+bold.family = "Fira Code"
+bold.style = "Bold"
+
+italic.family = "Fira Code"
+italic.style = "Italic"
+
+size = 14.0
+

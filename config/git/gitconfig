@@ -1,0 +1,30 @@
+[blame]
+    coloring = highlightRecent
+    showEmail = true
+    showName = false
+    date = relative
+
+[color "blame"]
+    highlightRecent = green,12 month ago,white,1 month ago,black red
+
+[submodule]
+    recurse = true
+
+[push]
+    default = current
+
+[core]
+    editor = code --wait
+
+[merge]
+    tool = vscode
+
+[mergetool "vscode"]
+    cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
+
+[diff]
+    tool = vscode
+
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+

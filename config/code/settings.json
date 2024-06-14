@@ -1,0 +1,13 @@
+{
+    "editor.fontFamily": "'Fira code', 'monospace', monospace",
+    "editor.minimap.enabled": false,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "node_modules": true
+    },
+    "terminal.integrated.shell.linux": "/bin/zsh",
+    "[markdown]": {
+        "editor.wordWrap": "on"
+    },
+}

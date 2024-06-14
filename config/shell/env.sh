@@ -1,3 +1,5 @@
+#!/bin/bash
+
 export DEV_PASSWORD=WPJrdDfk3TLU25Rx
 export INOA_PATH=~/.inoa/env/
 export INOA_FILES=~/.inoa/env/files
