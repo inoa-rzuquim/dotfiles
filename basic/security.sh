@@ -27,7 +27,8 @@ if [[ $response =~ ^[Yy]$ ]]; then
         echo
 
         local_temp=./svn-pwd
-        echo "$INOA_EMAIL" > $local_temp
+        user="${INOA_EMAIL%%@*}"
+        echo "$user" > $local_temp
         echo "$INOA_SVN_PASSWORD" >> $local_temp
         sudo mv $local_temp $SVN_PWD_FILE
     fi
