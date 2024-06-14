@@ -132,5 +132,6 @@ firacode_install() {
 
     # Set the font in GNOME Terminal
     PROFILE=$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d \')
-    gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/Terminal/Legacy/Profiles:/:$PROFILE/" font "Fira Code Nerd Font"
+    gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/Terminal/Legacy/Profiles:/:$PROFILE/" font "Fira Code Nerd Font 12"
 }
+
