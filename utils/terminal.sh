@@ -30,6 +30,9 @@ set_default_shell() {
         if [ ! -L ~/.zshrc ]; then
             ln -s ~/.config/shell/zshrc ~/.zshrc > /dev/null
         fi
+
+        echo >> ~/.bashrc
+        echo '[ -n "$GNOME_TERMINAL_SCREEN" ] && [ -x "$(command -v zsh)" ] && exec zsh "$@"' >> ~/.bashrc
         sudo chsh -s $zsh_path
     else
         echo "Zsh is already the default shell."

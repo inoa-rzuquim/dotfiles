@@ -38,7 +38,7 @@ BASIC_PACKAGES=(
     # terminal
     "zsh @ custom"
     "starship @ cargo"
-    "fonts-firacode @ apt"
+    "fonts-firacode @ custom"
     "gitui @ cargo"
     "alacritty @ cargo"
     "eza @ cargo"
@@ -129,4 +129,3 @@ for package in "${BASIC_PACKAGES[@]}"; do
             ;;
     esac
 done
-

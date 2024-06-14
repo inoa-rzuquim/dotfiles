@@ -59,6 +59,9 @@ custom_install() {
         copyq)
             copyq_install
             ;;
+        fonts-firacode)
+            firacode_install
+            ;;
     esac
 }
 
@@ -94,6 +97,12 @@ nodejs_install() {
 
 zsh_install() {
     sudo apt install -y zsh
+
+    echo "Setting GNOME Terminal to use Zsh..."
+
+    PROFILE=$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d \')
+    gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/Terminal/Legacy/Profiles:/:$PROFILE_ID/" use-custom-command true
+    gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/Terminal/Legacy/Profiles:/:$PROFILE_ID/" custom-command 'zsh'
 }
 
 rust_install() {
@@ -107,3 +116,21 @@ copyq_install() {
     sudo apt install -y copyq
 }
 
+firacode_install() {
+    sudo apt install -y fonts-firacode
+    FONT_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip"
+    FONT_DIR="$HOME/.local/share/fonts"
+
+    mkdir -p "$FONT_DIR"
+
+    wget "$FONT_URL" -O "$FONT_NAME.zip"
+    unzip "$FONT_NAME.zip" -d "$FONT_DIR"
+
+    mv "$FONT_NAME"/* "$FONT_DIR/"
+
+    fc-cache -fv
+
+    # Set the font in GNOME Terminal
+    PROFILE=$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d \')
+    gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/Terminal/Legacy/Profiles:/:$PROFILE/" font "Fira Code Nerd Font"
+}
