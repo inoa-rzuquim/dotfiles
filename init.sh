@@ -26,5 +26,22 @@ echo ""
 echo ""
 echo ""
 source "./basic/security.sh"
+echo ""
+echo ""
+echo ""
 
+read -p "Do you want to setup the dev env for: [bt/at] " response
+case "$response" in
+    bt)
+        source "./dev/bt.sh"
+        ;;
+    at)
+        source "./dev/at.sh"
+        ;;
+    *)
+        echo -e "${RED}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${NC}"
+        echo -e "${RED}Unkown dev env profile $response!${NC}"
+        echo -e "${RED}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${NC}"
+        ;;
+esac
 

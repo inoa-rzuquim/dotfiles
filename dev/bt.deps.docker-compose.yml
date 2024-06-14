@@ -1,0 +1,50 @@
+version: '3.9'
+services:
+    rabbitmq:
+        image: 'rabbitmq:3-management'
+        container_name: rabbitmq
+        hostname: rabbit1
+        ports:
+            - '5672:5672'
+            - '5673:5673'
+            - '15672:15672'
+        volumes:
+            - ${DOCKER_VOLUMES}/rabbitmq:/var/lib/rabbitmq/mnesia
+        networks:
+            - inoa_bt
+        restart: unless-stopped
+
+    mssql:
+        image: 'mcr.microsoft.com/mssql/server:latest'
+        container_name: mssql
+        ports:
+            - '1433:1433'
+        user: root
+        volumes:
+            - ${DOCKER_VOLUMES}/sql-server:/var/opt/mssql/data
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=${DEV_PASSWORD}
+        networks:
+            - inoa_bt
+        restart: unless-stopped
+
+    samba:
+        image: 'ghcr.io/servercontainers/samba'
+        container_name: samba
+        hostname: samba
+        environment:
+            - ACCOUNT_inoa=${DEV_PASSWORD}
+            - SAMBA_GLOBAL_CONFIG_allowhosts=ALL
+            - SAMBA_VOLUME_CONFIG_inoa="[inoa]; path=/shares/inoa; valid users = inoa; guest ok = no; read only = no; browseable = yes; "
+        ports:
+            - '8989:445' # Windows already uses port 445, so we need to use another
+        volumes:
+            - ${DOCKER_VOLUMES}/samba/shares/:/shares/inoa
+            - ${DOCKER_VOLUMES}/samba/avahi/services/:/external/avahi
+        networks:
+            - inoa_bt
+
+networks:
+    inoa_bt:
+        driver: bridge

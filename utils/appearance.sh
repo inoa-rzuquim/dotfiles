@@ -15,7 +15,10 @@ set_inoa_bg() {
             fi
         done
 
+        echo "Ensuring desktop app description for snapd apps"
         gsettings set org.gnome.desktop.background picture-uri file://$HOME/.inoa/wallpaper.png
+        gsettings set org.gnome.desktop.background picture-uri-dark file://$HOME/.inoa/wallpaper.png
+        gsettings set org.gnome.desktop.background picture-options "scaled"
 
         DOCK_APPS=(
             'alacritty'
