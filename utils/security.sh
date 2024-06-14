@@ -10,7 +10,7 @@ download_full_ovpn() {
     download_complete_ovpn_file
     disconnect_vpn
 
-    if [ ! -f $OVPN_FILES_SECRETS ]; 
+    if [ ! -f $OVPN_FILES_SECRETS ]; then
         echo -e "${RED}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${NC}"
         echo -e "${RED}Could not download inoa-vpn.ovpn${NC}"
         echo -e "${RED}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${NC}"
