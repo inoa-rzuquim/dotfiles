@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=$HOME/.cargo/bin/alacritty
+Exec=/usr/bin/alacritty
 # Icon=Alacritty
 Icon=org.gnome.Terminal
 Terminal=false
@@ -15,4 +15,4 @@ Actions=New;
 
 [Desktop Action New]
 Name=New Terminal
-Exec=$HOME/.cargo/bin/alacritty
+Exec=/usr/bin/alacritty

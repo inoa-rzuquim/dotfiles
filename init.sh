@@ -22,4 +22,9 @@ echo ""
 echo ""
 echo ""
 source "./basic/config.sh"
+echo ""
+echo ""
+echo ""
+source "./basic/security.sh"
+
 

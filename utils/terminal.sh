@@ -16,6 +16,11 @@ set_default_terminal() {
 
         gsettings set org.gnome.desktop.default-applications.terminal exec "$terminal_name"
         gsettings set org.gnome.desktop.default-applications.terminal exec-arg ''
+
+        bin_link="/usr/bin/$terminal_name"
+        if [ ! -L "$bin_link" ]; then
+            ln -s "$set_terminal" "$bin_link" > /dev/null
+        fi
     else
         echo "Alacritty is already the default terminal emulator."
     fi
@@ -40,6 +45,7 @@ set_default_shell() {
 }
 
 set_git_config() {
+    mkdir -p ~/inoa/dev/
     if [ ! -L ~/.gitconfig ]; then
         echo "Setting up git..."
         ln -s ~/.config/git/gitconfig ~/.gitconfig > /dev/null
