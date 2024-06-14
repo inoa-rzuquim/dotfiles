@@ -12,7 +12,7 @@ response=${response:-Y}
 if [[ $response =~ ^[Yy]$ ]]; then
     VPN_PWD_FILE=/etc/secrets/vpn-pwd
     if [ ! -f $VPN_PWD_FILE ]; then
-        read -s "Please enter your VPN password: " INOA_VPN_PASSWORD
+        read -s -p "Please enter your VPN password: " INOA_VPN_PASSWORD
         echo
         sudo echo "$INOA_EMAIL" > $VPN_PWD_FILE
         sudo echo "$INOA_VPN_PASSWORD" >> $VPN_PWD_FILE
