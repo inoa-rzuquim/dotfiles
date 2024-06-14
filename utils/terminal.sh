@@ -36,9 +36,13 @@ set_default_shell() {
             ln -s ~/.config/shell/zshrc ~/.zshrc > /dev/null
         fi
 
-        echo >> ~/.bashrc
-        echo '[ -n "$GNOME_TERMINAL_SCREEN" ] && [ -x "$(command -v zsh)" ] && exec zsh "$@"' >> ~/.bashrc
-        sudo chsh -s $zsh_path
+        # suggestions 
+        git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/autosuggestions
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/syntax-highlighting
+        git clone https://github.com/zsh-users/completions.git ~/.zsh/completions
+
+        echo "Please enter your user's password"
+        chsh -s $zsh_path
     else
         echo "Zsh is already the default shell."
     fi

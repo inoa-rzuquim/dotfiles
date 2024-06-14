@@ -4,8 +4,11 @@ export EDITOR="$VISUAL"
 export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$HOME/.cargo/bin:$HOME/.dotnet/bin:$PATH
 export BROWSER="google-chrome"
 
-# ignoring history duplicate
-export HISTCONTROL=ignoreboth
+# History
+export HISTFILE=~/.config/.zsh_history
+export HISTSIZE=100
+export SAVEHIST=1000
+export HISTCONTROL=ignoreboth # ignoring history duplicate
 
 # clipboard config
 export CM_SELECTIONS="clipboard"
@@ -73,8 +76,9 @@ function search {
 # --------------------
 # auto suggestions
 # --------------------
-# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-# fpath=(~/.zsh/zsh-completions/src $fpath)
+source ~/.zsh/autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/syntax-highlighting/zsh-syntax-highlighting.zsh
+fpath=(~/.zsh/completions $fpath)
 
 # --------------------
 # context navigation
