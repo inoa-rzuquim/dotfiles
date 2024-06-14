@@ -2,7 +2,7 @@
 
 # Define variables
 SVN_OVPN_CONFIG="~/.inoa/dotfiles/security/inoa-svn-only.ovpn"
-SVN_URL="https://svn.inoa.com.br/documents/Production/_Common/VPN/inoa-vpn-g2-beta2.ovpn"
+SVN_URL="svn://svn.inoa.com.br/documents/Production/_Common/VPN/inoa-vpn-g2-beta2.ovpn"
 OVPN_FILES_SECRETS="/etc/secrets/inoa-vpn.ovpn"
 
 download_full_ovpn() {

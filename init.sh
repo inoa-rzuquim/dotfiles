@@ -22,11 +22,11 @@ for file in ~/.config/shell/sh/*.sh; do
     . "$file"
 done
 
-# source "./basic/install.sh"
+source "./basic/install.sh"
 echo ""
 echo ""
 echo ""
-# source "./basic/config.sh"
+source "./basic/config.sh"
 echo ""
 echo ""
 echo ""
