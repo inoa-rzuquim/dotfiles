@@ -42,7 +42,7 @@ install_with_npm() {
 custom_install() {
     case "$1" in
         docker-ce)
-            docker_pre_install
+            docker_install
             ;;
         google-chrome-stable)
             chrome_install
@@ -68,7 +68,7 @@ custom_install() {
     esac
 }
 
-docker_pre_install() {
+docker_install() {
     sudo install -m 0755 -d /etc/apt/keyrings
     sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
     sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -78,7 +78,7 @@ docker_pre_install() {
         $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
         sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-    sudo apt update -y
+    sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
     sudo usermod -aG docker $USER
     newgrp docker

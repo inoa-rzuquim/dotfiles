@@ -53,19 +53,13 @@ BASIC_PACKAGES=(
     "xclip @ apt"
     "git-delta @ cargo"
 
-    # docker
-    "docker-ce @ apt"
-    "docker-ce-cli @ apt"
-    "containerd.io @ apt"
-    "docker-buildx-plugin @ apt"
-    "docker-compose-plugin @ apt"
-
     # editors
     "neovim @ apt"
     "code @ snap"
     "rider @ snap"
 
     # devtools
+    "docker-ce @ custom"
     "prettier @ npm"
 )
 
