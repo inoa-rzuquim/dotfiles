@@ -27,7 +27,7 @@ set_inoa_bg() {
             'code_code'
             'telegram-desktop_telegram-desktop'
             'teams-for-linux_teams-for-linux'
-            'Zoom.desktop'
+            'Zoom'
             'remmina_remmina'
             'org.gnome.Nautilus'
             'pop-cosmic-workspaces'

@@ -19,6 +19,7 @@ if [[ $response =~ ^[Yy]$ ]]; then
         echo "$INOA_EMAIL" > $local_temp
         echo "$INOA_VPN_PASSWORD" >> $local_temp
         sudo mv $local_temp $VPN_PWD_FILE
+        sudo chmod 400 $VPN_PWD_FILE
     fi
 
     SVN_PWD_FILE=/etc/secrets/svn-pwd
@@ -31,9 +32,10 @@ if [[ $response =~ ^[Yy]$ ]]; then
         echo "$user" > $local_temp
         echo "$INOA_SVN_PASSWORD" >> $local_temp
         sudo mv $local_temp $SVN_PWD_FILE
+        sudo chmod 400 $SVN_PWD_FILE
     fi
 
-    download_full_ovpn
+    # download_full_ovpn
 else
     echo -e "${RED}Won't apply vpn configuration!${NC}"
 fi

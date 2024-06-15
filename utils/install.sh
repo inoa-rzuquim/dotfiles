@@ -9,6 +9,8 @@ is_installed() {
         return 0
     elif npm list -g --depth=0 2>/dev/null | grep "$1@" &>/dev/null; then
         return 0
+    elif npm list -g --depth=0 2>/dev/null | grep "$1" &>/dev/null; then
+        return 0
     elif [ "$1" = "nodejs" ] && command -v node >/dev/null 2>&1; then
         return 0
     else
@@ -32,6 +34,7 @@ install_with_snap() {
 }
 
 install_with_cargo() {
+    echo "INSTALANDO $1"
     cargo install "$1"
 }
 
@@ -64,6 +67,9 @@ custom_install() {
             ;;
         zoom)
             zoom_install
+            ;;
+        klogg)
+            klogg_install
             ;;
     esac
 }
@@ -155,4 +161,12 @@ zoom_install() {
 
     sudo apt update
     sudo apt install -y zoom
+}
+
+glogg_install() {
+    curl -sS https://klogg.filimonov.dev/klogg.gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/klogg.gpg &>/dev/null
+    curl -sS https://klogg.filimonov.dev/deb/klogg.jammy.list | sudo tee /etc/apt/sources.list.d/klogg.list &>/dev/null
+
+    sudo apt-get update
+    sudo apt install -y klogg
 }

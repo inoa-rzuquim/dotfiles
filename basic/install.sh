@@ -4,63 +4,67 @@
 
 BASIC_PACKAGES=(
     # tools
-    "git @ apt"
-    "subversion @ apt"
-    "snapd @ apt"
-    "rustup @ custom"
-    "nodejs @ custom"
-    "python3 @ apt"
-    "dotnet-sdk-8.0 @ apt"
-    "curl @ apt"
-    "btop @ apt"
-    "dos2unix @ apt"
-    "google-chrome-stable @ custom"
-    "build-essential @ apt"
-    "ca-certificates @ apt"
-    "flameshot @ apt"
-    "obsidian @ snap"
-    "p7zip-full @ apt"
-    "p7zip-rar @ apt"
-    "cmake @ apt"
-    "pkg-config @ apt"
-    "libfreetype6-dev @ apt"
-    "libfontconfig1-dev @ apt"
-    "libxcb-xfixes0-dev @ apt"
-    "libxkbcommon-dev @ apt"
-    "copyq @ custom"
-    "zoom @ custom"
+    "git | apt"
+    "subversion | apt"
+    "snapd | apt"
+    "rustup | custom"
+    "nodejs | custom"
+    "python3 | apt"
+    "dotnet-sdk-8.0 | apt"
+    "curl | apt"
+    "btop | apt"
+    "dos2unix | apt"
+    "google-chrome-stable | custom"
+    "build-essential | apt"
+    "ca-certificates | apt"
+    "flameshot | apt"
+    "obsidian | snap"
+    "p7zip-full | apt"
+    "p7zip-rar | apt"
+    "cmake | apt"
+    "pkg-config | apt"
+    "libfreetype6-dev | apt"
+    "libfontconfig1-dev | apt"
+    "libxcb-xfixes0-dev | apt"
+    "libxkbcommon-dev | apt"
+    "copyq | custom"
+    "zoom | custom"
 
     # communications
-    "easy-rsa @ apt"
-    "openvpn @ apt"
-    "remmina @ snap"
-    "telegram-desktop @ snap"
-    "teams-for-linux @ snap"
+    "easy-rsa | apt"
+    "openvpn | apt"
+    "remmina | snap"
+    "telegram-desktop | snap"
+    "teams-for-linux | snap"
 
     # terminal
-    "zsh @ custom"
-    "starship @ cargo"
-    "fonts-firacode @ custom"
-    "gitui @ cargo"
-    "alacritty @ cargo"
-    "eza @ cargo"
-    "ripgrep @ apt"
-    "bat @ apt"
-    "fd-find @ apt"
-    "fzf @ apt"
-    "tlrc @ cargo"
-    "tree @ apt"
-    "xclip @ apt"
-    "git-delta @ cargo"
+    "zsh | custom"
+    "starship | cargo"
+    "fonts-firacode | custom"
+    "gitui | cargo"
+    "alacritty | cargo"
+    "eza | cargo"
+    "ripgrep | apt"
+    "bat | apt"
+    "fd-find | apt"
+    "fzf | apt"
+    "tlrc | cargo"
+    "tree | apt"
+    "xclip | apt"
+    "git-delta | cargo"
 
     # editors
-    "neovim @ apt"
-    "code @ snap"
-    "rider @ snap"
+    "neovim | apt"
+    "code | snap"
+    "rider | snap"
 
     # devtools
-    "docker-ce @ custom"
-    "prettier @ npm"
+    "docker-ce | custom"
+    "prettier | npm"
+    "commitizen@4.2.2 | npm"
+    "coffeescript@1.12.6 | npm"
+    "typescript@4.4 | npm"
+    "klogg | custom"
 )
 
 echo
@@ -68,7 +72,7 @@ echo -e "${VIOLET}* Installing basic tools${NC}"
 echo "We are going to install the following tools:"
 
 for package in "${BASIC_PACKAGES[@]}"; do
-    package_name=$(echo "$package" | cut -d '@' -f 1 | xargs)
+    package_name=$(echo "$package" | cut -d '|' -f 1 | xargs)
     if is_installed "$package_name"; then
         echo -e "  - $package_name ${GREEN}(Already installed)${NC}"
     else
@@ -91,7 +95,7 @@ sudo apt update -y
 sudo apt upgrade
 
 for package in "${BASIC_PACKAGES[@]}"; do
-    package_name=$(echo "$package" | cut -d '@' -f 1 | xargs)
+    package_name=$(echo "$package" | cut -d '|' -f 1 | xargs)
 
     if is_installed "$package_name"; then 
         continue
@@ -99,7 +103,7 @@ for package in "${BASIC_PACKAGES[@]}"; do
 
     custom_install "$package_name" 
 
-    package_manager=$(echo "$package" | cut -d '@' -f 2 | xargs)
+    package_manager=$(echo "$package" | cut -d '|' -f 2 | xargs)
 
     echo "Installing $package_name with $package_manager..."
     case "$package_manager" in
