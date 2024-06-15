@@ -54,11 +54,18 @@ set_git_config() {
     mkdir -p ~/inoa/dev/
     if [ ! -L ~/.gitconfig ]; then
         echo "Setting up git..."
-        ln -s ~/.config/git/gitconfig ~/.gitconfig > /dev/null
-        git config user.email $INOA_EMAIL
-        git config user.name $INOA_NAME
+        ln -s ~/.config/git/gitconfig.toml ~/.gitconfig > /dev/null
+    else
+        echo "Git already configured"
+    fi
+
+    GIT_WHO_AM_I=~/.config/git/whoami.toml
+    if [ ! -f $GIT_WHO_AM_I  ]; then
+        echo "Setting up git whoami..."
+        echo '[user]' > $GIT_WHO_AM_I
+        echo "email = $INOA_EMAIL" >> $GIT_WHO_AM_I
+        echo "email = $INO_NAME" >> $GIT_WHO_AM_I
     else
         echo "Git already configured"
     fi
 }
-

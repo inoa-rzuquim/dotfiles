@@ -7,7 +7,7 @@
         "**/.svn": true,
         "node_modules": true
     },
-    "terminal.integrated.shell.linux": "/bin/zsh",
+    "terminal.integrated.fontFamily": "FiraCode Nerd Font Mono",
     "[markdown]": {
         "editor.wordWrap": "on"
     },

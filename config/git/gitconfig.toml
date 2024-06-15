@@ -1,3 +1,6 @@
+[include]
+    path=~/.config/git/whoami.toml
+
 [blame]
     coloring = highlightRecent
     showEmail = true

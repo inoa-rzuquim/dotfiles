@@ -23,16 +23,15 @@ set_inoa_bg() {
         DOCK_APPS=(
             'alacritty'
             'google-chrome'
-            'pop-cosmic-launcher'
-            'pop-cosmic-workspaces'
-            'pop-cosmic-applications'
-            'code_code'
             'rider_rider'
-            'obsidian_obsidian'
-            'remmina_remmina'
+            'code_code'
             'telegram-desktop_telegram-desktop'
             'teams-for-linux_teams-for-linux'
+            'Zoom.desktop'
+            'remmina_remmina'
             'org.gnome.Nautilus'
+            'pop-cosmic-workspaces'
+            'pop-cosmic-applications'
             'gnome-control-center'
         )
 

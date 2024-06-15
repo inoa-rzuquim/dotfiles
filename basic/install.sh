@@ -28,6 +28,7 @@ BASIC_PACKAGES=(
     "libxcb-xfixes0-dev @ apt"
     "libxkbcommon-dev @ apt"
     "copyq @ custom"
+    "zoom @ custom"
 
     # communications
     "easy-rsa @ apt"
