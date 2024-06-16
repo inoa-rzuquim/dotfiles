@@ -54,7 +54,7 @@ BASIC_PACKAGES=(
     "git-delta | cargo"
 
     # editors
-    "neovim | apt"
+    "neovim | snap"
     "code | snap"
     "rider | snap"
 

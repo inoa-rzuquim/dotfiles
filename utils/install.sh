@@ -163,7 +163,7 @@ zoom_install() {
     sudo apt install -y zoom
 }
 
-glogg_install() {
+klogg_install() {
     curl -sS https://klogg.filimonov.dev/klogg.gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/klogg.gpg &>/dev/null
     curl -sS https://klogg.filimonov.dev/deb/klogg.jammy.list | sudo tee /etc/apt/sources.list.d/klogg.list &>/dev/null
 
