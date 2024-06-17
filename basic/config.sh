@@ -36,3 +36,13 @@ else
     echo -e "${RED}Won't apply appearance configuration!${NC}"
 fi
 
+echo -e "${VIOLET}* Shortcuts${NC}"
+echo
+read -p "Apply default shortcuts? [Y/n] " response
+response=${response:-Y}
+if [[ $response =~ ^[Yy]$ ]]; then
+    set_shortcuts
+else
+    echo -e "${RED}Won't apply shortcuts!${NC}"
+fi
+
