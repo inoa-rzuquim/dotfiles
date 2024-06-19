@@ -8,7 +8,7 @@ if [ -z "$INOA_NAME" ] || [ -z "$INOA_EMAIL" ]; then
     else
         INOA_EMAIL=$(head -n 1 $WHOAMI_FILE)
         INOA_NAME=$(tail -n 1 $WHOAMI_FILE)
-        echo "Wellcome back $INOA_NAME ($INOA_EMAIL)!"
+        echo "Welcome back $INOA_NAME ($INOA_EMAIL)!"
     fi
 fi
 
@@ -17,12 +17,14 @@ source "./utils/install.sh"
 source "./utils/terminal.sh"
 source "./utils/appearance.sh"
 source "./utils/security.sh"
+source "./utils/shortcuts.sh"
 
-for file in ~/.config/shell/sh/*.sh; do
+
+for file in ~/.inoa/dotfiles/config/shell/sh/*.sh; do
     . "$file"
 done
 
-source "./basic/install.sh"
+# source "./basic/install.sh"
 echo ""
 echo ""
 echo ""
@@ -49,4 +51,3 @@ case "$response" in
         echo -e "${RED}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!${NC}"
         ;;
 esac
-

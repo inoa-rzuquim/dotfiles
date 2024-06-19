@@ -54,7 +54,7 @@ BASIC_PACKAGES=(
     "git-delta | cargo"
 
     # editors
-    "neovim | snap"
+    "nvim | snap"
     "code | snap"
     "rider | snap"
 
@@ -86,7 +86,6 @@ response=${response:-Y}
 if [[ $response =~ ^[Yy]$ ]]; then
     echo -e "${GREEN}OK! LET's GO!${NC}"
 else
-    echo -e "${RED}Aborting setup!!${NC}"
     echo -e "${RED}Comment out what you don't want and run the script later.${NC}"
     return
 fi

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set_inoa_bg() {
-    if [ ! -f ~/bg.png ]; then
+    if [ ! -f ~/.inoa/wallpaper.png ]; then
         echo "Adding inoa wallpaper"
         cp ./appearance/wallpaper.png ~/.inoa/
 

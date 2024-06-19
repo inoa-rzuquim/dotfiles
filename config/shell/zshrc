@@ -107,3 +107,7 @@ done
 export NVM_DIR=~/.nvm
 source "$NVM_DIR/nvm.sh"
 
+if [[ -f "$HOME/.config/shell/custom.sh" ]]; then
+    source "$HOME/.config/shell/custom.sh"
+fi
+

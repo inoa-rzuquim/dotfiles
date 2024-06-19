@@ -31,3 +31,6 @@
 [difftool "vscode"]
     cmd = code --wait --diff $LOCAL $REMOTE
 
+[include]
+    path=~/.config/git/custom.toml
+

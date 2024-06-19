@@ -66,6 +66,6 @@ set_git_config() {
         echo "email = $INOA_EMAIL" >> $GIT_WHO_AM_I
         echo "email = $INO_NAME" >> $GIT_WHO_AM_I
     else
-        echo "Git already configured"
+        echo "Git whoiam already configured"
     fi
 }

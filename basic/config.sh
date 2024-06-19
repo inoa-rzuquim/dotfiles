@@ -11,6 +11,7 @@ if [[ $response =~ ^[Yy]$ ]]; then
     rsync \
         --exclude ".git/" \
         --exclude ".DS_Store" \
+        --ignore-existing \
         -avh --no-perms ./config/ $HOME/.config > /dev/null
 
     set_default_terminal "$HOME/.cargo/bin/alacritty"
@@ -28,6 +29,7 @@ if [[ $response =~ ^[Yy]$ ]]; then
     rsync \
         --exclude ".git/" \
         --exclude ".DS_Store" \
+        --ignore-existing \
         -avh --no-perms ./gnome/ $HOME/.local > /dev/null
 
     set_inoa_bg

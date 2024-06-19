@@ -60,7 +60,7 @@ if [ ! -f $WHOAMI_FILE ]; then
 else
     INOA_EMAIL=$(head -n 1 $WHOAMI_FILE)
     INOA_NAME=$(tail -n 1 $WHOAMI_FILE)
-    echo "Wellcome back $INOA_NAME ($INOA_EMAIL)!"
+    echo "Welcome back $INOA_NAME ($INOA_EMAIL)!"
 fi
 echo
 
