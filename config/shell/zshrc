@@ -73,13 +73,33 @@ function search {
 # zsh improvements
 # --------------------
 source ~/.zsh/autosuggestions/zsh-autosuggestions.zsh
-
-fpath=(~/.zsh/completions/src $fpath)
-
 source ~/.zsh/history-substring-search/zsh-history-substring-search.zsh
 bindkey '\eOA' history-substring-search-up # or '^[[A' 
 bindkey '\eOB' history-substring-search-down # or '^[[B'
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+
+# completions
+source ~/.zsh/completions/zsh-completions.plugin.zsh
+fpath=(~/.zsh/completions/src ~/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+
+# dotnet completions
+_dotnet_zsh_complete()
+{
+  local completions=("$(dotnet complete "$words")")
+
+  # If the completion list is empty, just continue with filename selection
+  if [ -z "$completions" ]
+  then
+    _arguments '*::arguments: _normal'
+    return
+  fi
+
+  # This is not a variable assignment, don't remove spaces!
+  _values = "${(ps:\n:)completions}"
+}
+compdef _dotnet_zsh_complete dotnet
 
 # --------------------
 # context navigation

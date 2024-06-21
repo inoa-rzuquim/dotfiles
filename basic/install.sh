@@ -10,6 +10,7 @@ BASIC_PACKAGES=(
     "rustup | custom"
     "nodejs | custom"
     "python3 | apt"
+    "python3.10-venv | apt"
     "dotnet-sdk-8.0 | apt"
     "curl | apt"
     "btop | apt"
