@@ -9,7 +9,7 @@ set_shortcuts() {
     base_gsettings="org.gnome.settings-daemon.plugins.media-keys.custom-keybinding"
     base_path="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
     custom_shortcuts=(
-        "PrintScreen Interactive;flameshot gui --path $HOME/Pictures/Screenshots/;Print"
+        "PrintScreen Interactive;flameshot gui;Print"
         "PrintScreen into file;flameshot full --path $HOME/Pictures/Screenshots/;<Shift>Print"
         "PrintScreen into clipboard;flameshot full --clipboard;<Ctrl>Print"
     )
