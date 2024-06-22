@@ -2,13 +2,13 @@
 
 SECRETS_DIR="/etc/secrets/"
 if [ ! -d $SECRETS_DIR ]; then
-  sudo mkdir $SECRETS_DIR
+    sudo mkdir $SECRETS_DIR
 fi
 
 read_password() {
-  local prompt=$1
-  read -s -p "$prompt" password
-  echo "$password"
+    local prompt=$1
+    read -s -p "$prompt" password
+    echo "$password"
 }
 
 echo -e "${VIOLET}* INOA VPN connections${NC}"
@@ -46,10 +46,10 @@ if [[ $response =~ ^[Yy]$ ]]; then
         while true; do
             INOA_SVN_PASSWORD=$(read_password "Please enter your SVN password:")
             echo
-            INOA_SVN_PASSWOR_REPEAT=$(read_password "Repeat the password: ")
+            INOA_SVN_PASSWORD_REPEAT=$(read_password "Repeat the password: ")
             echo
 
-            if [ "$INOA_SVN_PASSWORD" == "$INOA_SVN_PASSWOR_REPEAT" ]; then
+            if [ "$INOA_SVN_PASSWORD" == "$INOA_SVN_PASSWORD_REPEAT" ]; then
                 break
             else
                 echo -e "${RED}Passwords do not match. Please try again.${NC}"
@@ -67,7 +67,63 @@ if [[ $response =~ ^[Yy]$ ]]; then
         sudo chown root $SVN_PWD_FILE
     fi
 
+    NUGET_PWD_FILE=/etc/secrets/nuget-pwd
+    if [ ! -f $NUGET_PWD_FILE ]; then
+        while true; do
+            echo -e "${CYAN}[https://inoanugetgallery.azurewebsites.net/].${NC}"
+            INOA_NUGET_PASSWORD=$(read_password "Please enter your nuget@inoa password:")
+            echo
+            INOA_NUGET_PASSWORD_REPEAT=$(read_password "Repeat the password: ")
+            echo
+
+            if [ "$INOA_NUGET_PASSWORD" == "$INOA_NUGET_PASSWORD_REPEAT" ]; then
+                break
+            else
+                echo -e "${RED}Passwords do not match. Please try again.${NC}"
+            fi
+        done
+
+        echo
+        local_temp=./nuget-pwd
+        user="${INOA_EMAIL%%@*}"
+        echo "$user" > $local_temp
+        echo "$INOA_NUGET_PASSWORD" >> $local_temp
+
+        sudo mv $local_temp $NUGET_PWD_FILE
+        sudo chmod 400 $NUGET_PWD_FILE
+        sudo chown root $NUGET_PWD_FILE
+    fi
+
+    NEXUS_PWD_FILE=/etc/secrets/nexus-pwd
+    if [ ! -f $NEXUS_PWD_FILE ]; then
+        while true; do
+            echo -e "${CYAN}[http://nexus.inoa.com.br/].${NC}"
+            INOA_NEXUS_PASSWORD=$(read_password "Please enter your Nexus password:")
+            echo
+            INOA_NEXUS_PASSWORD_REPEAT=$(read_password "Repeat the password: ")
+            echo
+
+            if [ "$INOA_NEXUS_PASSWORD" == "$INOA_NEXUS_PASSWORD_REPEAT" ]; then
+                break
+            else
+                echo -e "${RED}Passwords do not match. Please try again.${NC}"
+            fi
+        done
+
+        echo
+        local_temp=./nexus-pwd
+        user="${INOA_EMAIL%%@*}"
+        echo "$user" > $local_temp
+        echo "$INOA_NEXUS_PASSWORD" >> $local_temp
+
+        sudo mv $local_temp $NEXUS_PWD_FILE
+        sudo chmod 400 $NEXUS_PWD_FILE
+        sudo chown root $NEXUS_PWD_FILE
+    fi
+
     download_full_ovpn
+    install_inoa_cli
+    setup_npm
 else
     echo -e "${RED}Won't apply vpn configuration!${NC}"
 fi

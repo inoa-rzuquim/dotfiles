@@ -1,7 +1,12 @@
 #!/bin/bash
 
 function inoa-vpn() {
-    sudo openvpn --config /etc/secrets/inoa-vpn.ovpn --auth-user-pass /etc/secrets/vpn-pwd --daemon
+    if curl -s --head --request GET https://nexus.inoa.com.br/ --max-time 2 | grep "200" &>/dev/null; then
+        echo "Already connected into inoa-vpn"
+        return 0
+    else
+        sudo openvpn --config /etc/secrets/inoa-vpn.ovpn --auth-user-pass /etc/secrets/vpn-pwd --daemon
+    fi
 }
 
 function inoa-svn-download-file() {
