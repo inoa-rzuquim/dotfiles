@@ -19,7 +19,6 @@ source "./utils/appearance.sh"
 source "./utils/security.sh"
 source "./utils/shortcuts.sh"
 
-
 for file in ~/.inoa/dotfiles/config/shell/sh/*.sh; do
     . "$file"
 done
